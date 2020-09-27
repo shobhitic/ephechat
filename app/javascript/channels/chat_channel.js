@@ -1,10 +1,11 @@
 import consumer from "./consumer"
 
 document.addEventListener("turbolinks:load", function () {
-  var shouldConnect = document.getElementById("chat-msg-page");
+  let shouldConnect = document.getElementById("chat-msg-page");
+  let roomId = document.getElementById("room-id").textContent;
 
   if (shouldConnect) {
-    window.chat = consumer.subscriptions.create("ChatChannel", {
+    window.chat = consumer.subscriptions.create({ channel: "ChatChannel", room: roomId }, {
       connected() {
         // Called when the subscription is ready for use on the server
         console.log("connected")
@@ -18,13 +19,13 @@ document.addEventListener("turbolinks:load", function () {
       received(data) {
         // Called when there's incoming data on the websocket for this channel
         console.log("received", data)
-        var msg = data.msg;
+        let msg = data.msg;
         let chatContainer = document.getElementById("chat-msg-page")
         chatContainer.innerHTML += "<p>" + msg + "<br/><em>-- "+ data.user +"</em></p>"
       },
 
       sendMsg(msg) {
-        this.perform('chat', { msg: msg })
+        this.perform('chat', { msg: msg, room: roomId })
       }
     });
 

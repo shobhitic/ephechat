@@ -2,7 +2,9 @@
   .row
     .col-6.offset-3
       %p Hello #{@name}
-      %p Room Code: #{params[:id]}
+      %p
+        Room Code:
+        %span#room-id #{params[:id]}
       %hr
 
       #chat-msg-page
