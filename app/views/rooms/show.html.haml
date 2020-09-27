@@ -1,0 +1,13 @@
+.container
+  .row
+    .col-6.offset-3
+      %p Hello #{@name}
+      %p Room Code: #{params[:id]}
+      %hr
+
+      #chat-msg-page
+
+      = form_with url: '', id: 'msg-form' do |f|
+        .form-group
+          = f.text_field :msg, class: 'form-control', placeholder: 'Enter Message', id: 'msg-input'
+        = f.submit 'Send', class: 'btn btn-success'

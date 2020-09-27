@@ -1,0 +1,17 @@
+.container
+  .row
+    .col-6.offset-3
+      .mt-5
+      = form_with url: '/rooms', method: 'post' do |f|
+        %p Create a New Room
+        .form-group
+          = f.text_field :name, placeholder: 'Enter your name', class: "form-control"
+        = f.submit 'Create Room', class: 'btn btn-success'
+
+      = form_with url: '/rooms', method: 'post' do |f|
+        %p Join an existing room
+        .form-group
+          = f.text_field :name, placeholder: 'Enter your name', class: "form-control"
+        .form-group
+          = f.text_field :room, placeholder: 'Enter the room code', class: "form-control"
+        = f.submit 'Join Room', class: 'btn btn-success'
